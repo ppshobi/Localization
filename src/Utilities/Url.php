@@ -99,20 +99,10 @@ class Url implements UrlInterface
     private static function extractAttributesFromRoutes($url, $routes)
     {
         $attributes = [];
+        $request = Request::create(implode('/', $url));
 
         foreach ($routes as $route) {
-            /**
-             * @var  Route    $route
-             * @var  Request  $request
-             */
-            $request = Request::create(implode('/', $url));
-
-            if ( ! $route->matches($request)) {
-                continue;
-            }
-
             $match = self::hasAttributesFromUriPath($url, $route->getUri(), $attributes);
-
             if ($match) { break; }
         }
 
