@@ -101,15 +101,6 @@ class Url implements UrlContract
         $attributes = [];
 
         foreach ($routes as $route) {
-            /**
-             * @var  \Illuminate\Routing\Route  $route
-             * @var  \Illuminate\Http\Request   $request
-             */
-            $request = Request::create(implode('/', $url));
-
-            if ( ! $route->matches($request))
-                continue;
-
             $match = self::hasAttributesFromUriPath($url, $route->uri(), $attributes);
 
             if ($match)
